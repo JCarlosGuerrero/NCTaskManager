@@ -65,7 +65,6 @@ public class Task {
         if (isRepeated()) {
             return start;
         } else {
-            this.time = start;          //time = 0 ???
             return time;
         }
     }
@@ -74,7 +73,6 @@ public class Task {
         if (isRepeated()) {
             return end;
         } else {
-            this.time = end;            //time = 0 ???
             return time;
         }
     }
@@ -109,10 +107,27 @@ public class Task {
     }
 
     public int nextTimeAfter(int current) {
-        if(current > this.end){
-            return start;                   //return nextStart; ???
+        if(isRepeated() && current <= start) {
+            return start;
+        } else if (!isRepeated() && current <= time) {
+            return time;
         } else {
             return -1;
         }
     }
+    /*
+    public int nextTimeAfter(int current) {
+        if(isRepeated()) {
+            if(current <= start) {
+                return start;
+            } else {
+                return -1;
+            }
+        } else if(current <= time) {
+            return time;
+        } else {
+            return -1;
+        }
+    }
+    */
 }
