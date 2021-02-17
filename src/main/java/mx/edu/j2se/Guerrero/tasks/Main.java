@@ -12,7 +12,6 @@ public class Main {
 
 		String elNombre = estudianteNC.getNombre();
 		System.out.println(elNombre);
+
 	}
-
-
 }
