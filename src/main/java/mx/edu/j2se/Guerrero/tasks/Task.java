@@ -91,7 +91,8 @@ public class Task {
             this.end = end;
             this.interval = interval;
         } else {
-            this.time = 0;                      //time desaparece???
+            Integer i = null;
+            this.time = i;
             this.start = start;
             this.end = end;
             this.interval = interval;
@@ -110,7 +111,7 @@ public class Task {
         if(isRepeated() && current <= start) {
             return start;
         } else if(isRepeated() && current <= end && current > start) {
-            return start = start +interval;
+            return start = start + interval;
         } else if(!isRepeated() && current <= time) {
             return time;
         } else {
