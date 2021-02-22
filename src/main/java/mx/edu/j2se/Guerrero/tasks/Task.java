@@ -16,8 +16,16 @@ public class Task {
     int     current;
 
     // Constructors
-    public Task(String title, int time) {}
-    public Task(String title, int start, int end, int interval) {}
+    public Task(String title, int time) {
+        this.title = title;
+        this.time = time;
+    }
+    public Task(String title, int start, int end, int interval) {
+        this.title = title;
+        this.start = start;
+        this.end = end;
+        this.interval = interval;
+    }
 
     //Methods for reading and setting the task name
     public String getTitle() {
@@ -30,11 +38,7 @@ public class Task {
 
     //Methods for reading and setting the task status
     public boolean isActive() {
-        if (active) {
-            return true;
-        } else {
-            return false;
-        }
+        return active;
     }
 
     public void setActive(boolean active) {
@@ -100,7 +104,7 @@ public class Task {
     }
 
     public boolean isRepeated() {
-        if(interval != 0) {
+        if(interval > 0) {
             return true;
         } else {
             return false;
