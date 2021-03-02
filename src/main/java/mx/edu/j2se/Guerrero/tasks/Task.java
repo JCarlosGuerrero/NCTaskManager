@@ -13,7 +13,6 @@ public class Task {
     int     end;
     int     interval;
     boolean active;
-    int     current;
 
     // Constructors
     public Task(String title, int time) {
@@ -90,13 +89,9 @@ public class Task {
     }
 
     public void setTime(int start, int end, int interval) {
-        if(isRepeated()) {
-            this.start = start;
-            this.end = end;
-            this.interval = interval;
+        if (!isRepeated()) {
+            this.time = 0;
         } else {
-            Integer i = null;
-            this.time = i;
             this.start = start;
             this.end = end;
             this.interval = interval;
@@ -104,20 +99,20 @@ public class Task {
     }
 
     public boolean isRepeated() {
-        if(interval > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return interval > 0;
     }
 
     public int nextTimeAfter(int current) {
-        if(isRepeated() && current <= start) {
-            return start;
-        } else if(isRepeated() && current <= end && current > start) {
-            return start = start + interval;
-        } else if(!isRepeated() && current <= time) {
-            return time;
+        if(isActive()) {
+            if(isRepeated() && current <= start) {
+                return start;
+            } else if(isRepeated() && current <= end && current > start) {
+                return start = start + interval;
+            } else if(!isRepeated() && current <= time) {
+                return time;
+            } else {
+                return -1;
+            }
         } else {
             return -1;
         }
