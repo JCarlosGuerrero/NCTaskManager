@@ -5,6 +5,7 @@ package mx.edu.j2se.Guerrero.tasks;
  * @version 1 17 02 2021
  * @author JoséCarlos
  */
+
 public class Task {
 
     String  title;
@@ -14,11 +15,27 @@ public class Task {
     int     interval;
     boolean active;
 
-    // Constructors
+    /**
+     * Constructs an inactive task to run at a specified time
+     * @param title Name of the Task
+     * @param time  Specified time to run
+     */
     public Task(String title, int time) {
+        if(time < 0) {
+            throw new IllegalArgumentException("Time cannot be negative");
+        }
         this.title = title;
         this.time = time;
     }
+
+    /** Constructor
+     * Constructs an inactive task to run at a specific time
+     * range with repetition interval
+     * @param title Name of the task
+     * @param start Start time of the task
+     * @param end End time of the task
+     * @param interval number of repetitions
+     */
     public Task(String title, int start, int end, int interval) {
         this.title = title;
         this.start = start;
@@ -26,25 +43,44 @@ public class Task {
         this.interval = interval;
     }
 
-    //Methods for reading and setting the task name
+
+    /**
+     * Get the title of the task
+     * @return the title
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Set the title of the task
+     * @param title new name for the task
+     */
     public void setTitle(String title) {
         this.title = title;
     }
 
-    //Methods for reading and setting the task status
+    /**
+     * Check the status of the task
+     * @return If the task is active or not
+     */
     public boolean isActive() {
         return active;
     }
 
+    /**
+     * Set the status of the task
+     * @param active Set if you want to activate or not the task
+     */
     public void setActive(boolean active) {
         this.active = active;
     }
 
-    //Methods for reading and changing execution time for non-repetitive tasks
+    /**
+     * Method to check the time of a non-repetitive task
+     * If repetitive: return start time
+     * @return the time of the task
+     */
     public int getTime() {
         if (isRepeated()) {
             return start;
@@ -53,17 +89,27 @@ public class Task {
         }
     }
 
+    /**
+     * Method for setting the time of a non-repetitive task
+     * If repetitive: It should become non-repetitive
+     * @param time the new time for the task
+     */
     public void setTime(int time) {
         if (isRepeated()) {
-            this.start = time;
-            this.end = time;
+            this.time = time;
+            this.start = 0;
+            this.end = 0;
             this.interval = 0;
         } else {
             this.time = time;
         }
     }
 
-    //Methods for reading and changing execution time for repetitive tasks
+    /**
+     * Method to get the start time of a repetitive task
+     * If non-repetitive: return the time of the task
+     * @return the time of the task
+     */
     public int getStartTime() {
         if (isRepeated()) {
             return start;
@@ -72,6 +118,11 @@ public class Task {
         }
     }
 
+    /**
+     * Method to get the end time of a repetitive task
+     * If non-repetitive: return the time of the task
+     * @return the time of the task
+     */
     public int getEndTime() {
         if (isRepeated()) {
             return end;
@@ -80,6 +131,12 @@ public class Task {
         }
     }
 
+    /**
+     * Method to get the repetition interval of a
+     * repetitive task.
+     * If non-repetitive: return 0
+     * @return the repetition interval
+     */
     public int getRepeatInterval() {
         if (isRepeated()) {
             return interval;
@@ -88,26 +145,48 @@ public class Task {
         }
     }
 
+    /**
+     * Method to set the interval, start and end
+     * time of a repetitive task.
+     * If non-repetitive: It should become repetitive
+     * @param start start time of the task
+     * @param end end time of the task
+     * @param interval repetition interval of the task
+     */
     public void setTime(int start, int end, int interval) {
-        if (!isRepeated()) {
-            this.time = 0;
+        if (isRepeated()) {
+            this.start = start;
+            this.end = end;
+            this.interval = interval;
         } else {
+            this.time = 0;
             this.start = start;
             this.end = end;
             this.interval = interval;
         }
     }
 
+    /**
+     * Check the task repeatability
+     * @return if is a repetitive task
+     */
     public boolean isRepeated() {
         return interval > 0;
     }
 
+    /**
+     * Check the next task time execution,
+     * if it's active and repeatability
+     * @param current current moment for
+     *                the next task time execution
+     * @return
+     */
     public int nextTimeAfter(int current) {
         if(isActive()) {
             if(isRepeated() && current <= start) {
                 return start;
             } else if(isRepeated() && current <= end && current > start) {
-                return start = start + interval;
+                return (end - start) / interval;
             } else if(!isRepeated() && current <= time) {
                 return time;
             } else {
