@@ -1,5 +1,7 @@
 package mx.edu.j2se.Guerrero.tasks;
 
+import mx.edu.j2se.Guerrero.evaluation.Circle;
+
 import java.util.Arrays;
 
 public class Main {
@@ -41,6 +43,33 @@ public class Main {
 
 		objeto3.Incoming(2,5);
 
+		LinkedTaskList objeto4 = new LinkedTaskList();
+
+		objeto4.add(new Task("comer",10));
+		objeto4.add(new Task("jugar",2,9,1));
+		objeto4.add(new Task("comer",5));
+		objeto4.add(new Task("bailar",4,6,1));
+
+
+		objeto4.remove(new Task("bailar",4,6,1));
+
+		Circle objeto5 = new Circle();
+		Circle objeto6 = new Circle(10);
+
+		objeto5.getRadius();
+		objeto6.getRadius();
+
+		objeto5.setRadius(2);
+		objeto6.setRadius(3);
+
+		System.out.println(objeto5.getArea());
+		System.out.println(objeto6.getArea());
+
+
+		Circle array[] = new Circle[3];
+		array[0] = new Circle(3);
+		array[1] = new Circle(6);
+		array[2] = new Circle(9);
 		/*persona estudianteNC = new persona();
 		estudianteNC.setEdad(19);
 		estudianteNC.setNombre("Eduardo");
