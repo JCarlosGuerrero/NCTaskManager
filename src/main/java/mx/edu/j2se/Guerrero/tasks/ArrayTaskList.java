@@ -32,7 +32,7 @@ public class ArrayTaskList {
         int k = 0;
         for (int i = 0, j = 0; i < arrayTask.length; i++) {
             if(task.title.equals(arrayTask[i].title)
-                && (task.time == arrayTask[i].time || task.start == arrayTask[i].start)) {
+            && (task.time == arrayTask[i].time || task.start == arrayTask[i].start)) {
                 taskInList = true;
                 k++;
                 continue;
@@ -72,12 +72,13 @@ public class ArrayTaskList {
      * @param to end of the interval
      * @return A list of the tasks in the interval
      */
-    public ArrayTaskList Incoming(int from, int to) {
+    public ArrayTaskList incoming(int from, int to) {
 
         ArrayTaskList selection = new ArrayTaskList();
         for (int i = 0;i < arrayTask.length; i++) {
             if(arrayTask[i].active) {
-                if(arrayTask[i].start >= from && arrayTask[i].end <= to || arrayTask[i].time >= from && arrayTask[i].time <= to) {
+                if(arrayTask[i].start >= from && arrayTask[i].end <= to
+                || arrayTask[i].time >= from && arrayTask[i].time <= to) {
                     selection.add(arrayTask[i]);
                 }
             }

@@ -21,21 +21,16 @@ public class Evaluation1 {
         array[1] = new Circle(6);
         array[2] = new Circle(9);
 
-
-
-        System.out.println("The biggest circle is: " + biggestCircle());
+        //System.out.println("The biggest circle is: " + biggestCircle(array[]));
     }
 
-    public static Circle biggestCircle() {
+    public static<T> int biggestCircle(T[] array,Circle big) {
 
-        for (int i = 0; i < 3; i++) {
-            if(biggestCircle().getRadius() > biggestCircle().getRadius()) {
-
+        for (int i = 0; i < array.length; i++) {
+            big.getRadius();
+            if(big.getRadius() > big.getRadius()) {
+                return i;
             }
-        }
-
-
-        throw new IndexOutOfBoundsException("Index out of range");
+        } return 0;
     }
-
 }

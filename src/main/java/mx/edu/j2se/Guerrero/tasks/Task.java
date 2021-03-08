@@ -37,6 +37,10 @@ public class Task {
      * @param interval number of repetitions
      */
     public Task(String title, int start, int end, int interval) {
+        if(end < start || interval < 1) {
+            throw new IllegalArgumentException("End time cannot be smaller than " +
+                    "start time, interval must be positive");
+        }
         this.title = title;
         this.start = start;
         this.end = end;
@@ -95,6 +99,9 @@ public class Task {
      * @param time the new time for the task
      */
     public void setTime(int time) {
+        if(time < 0) {
+            throw new IllegalArgumentException("Time cannot be negative");
+        }
         if (isRepeated()) {
             this.time = time;
             this.start = 0;
@@ -154,6 +161,10 @@ public class Task {
      * @param interval repetition interval of the task
      */
     public void setTime(int start, int end, int interval) {
+        if(end < start || interval < 1) {
+            throw new IllegalArgumentException("End time cannot be smaller than" +
+                    "start time, interval must be positive");
+        }
         if (isRepeated()) {
             this.start = start;
             this.end = end;

@@ -2,22 +2,20 @@ package mx.edu.j2se.Guerrero.tasks;
 
 import mx.edu.j2se.Guerrero.evaluation.Circle;
 
-import java.util.Arrays;
-
 public class Main {
 
 	public static void main(String[] args) {
 
-		Task objeto1 = new Task("correr",5);
+		Task objeto1 = new Task("correr",2);
 		objeto1.setActive(true);
 
 		System.out.println(objeto1.nextTimeAfter(3));
 		System.out.println();
 
-		Task objeto2 = new Task("nadar",1,10,1);
+		Task objeto2 = new Task("nadar",3,5,1);
 		objeto2.setActive(true);
 
-		objeto1.setTime(1,10,2);
+		objeto1.setTime(2,4,2);
 		objeto2.setTime(5);
 
 		System.out.println(objeto2.title + " "+ objeto2.start + " " + objeto2.end + " " + objeto2.interval);
@@ -33,7 +31,6 @@ public class Main {
 		objeto3.add(new Task("volar",6));
 		objeto3.add(new Task("teletransportar",1,2,3));
 		objeto3.add(new Task("volar",2,10,2));
-		objeto3.add(new Task(null,0));
 
 		objeto3.remove(new Task("volar",6));
 
@@ -41,35 +38,31 @@ public class Main {
 
 		System.out.println(objeto3.getTask(2));
 
-		objeto3.Incoming(2,5);
+		objeto3.incoming(2,5);
 
 		LinkedTaskList objeto4 = new LinkedTaskList();
 
 		objeto4.add(new Task("comer",10));
-		objeto4.add(new Task("jugar",2,9,1));
-		objeto4.add(new Task("comer",5));
-		objeto4.add(new Task("bailar",4,6,1));
+		objeto4.add(new Task("jugar",2,5,1));
+		objeto4.add(new Task("comer",2,9,2));
+		objeto4.add(new Task("votar",5));
+		objeto4.add(new Task("comer",10));
+
+		objeto4.list.get(0).setActive(true);
+		objeto4.list.get(1).setActive(true);
+		objeto4.list.get(2).setActive(true);
+		objeto4.list.get(3).setActive(true);
+		objeto4.list.get(4).setActive(true);
+
+		objeto4.remove(new Task("comer",10));
+
+		System.out.println(objeto4.size());
+
+		System.out.println(objeto4.getTask(1));
+
+		objeto4.Incoming(1,5);
 
 
-		objeto4.remove(new Task("bailar",4,6,1));
-
-		Circle objeto5 = new Circle();
-		Circle objeto6 = new Circle(10);
-
-		objeto5.getRadius();
-		objeto6.getRadius();
-
-		objeto5.setRadius(2);
-		objeto6.setRadius(3);
-
-		System.out.println(objeto5.getArea());
-		System.out.println(objeto6.getArea());
-
-
-		Circle array[] = new Circle[3];
-		array[0] = new Circle(3);
-		array[1] = new Circle(6);
-		array[2] = new Circle(9);
 		/*persona estudianteNC = new persona();
 		estudianteNC.setEdad(19);
 		estudianteNC.setNombre("Eduardo");
