@@ -2,15 +2,16 @@ package mx.edu.j2se.Guerrero.tasks;
 
 import java.util.Arrays;
 
-public class ArrayTaskList {
+    public class ArrayTaskList extends AbstractTaskList {
 
-    int n = 2;  //XXX Como iniciar n
+    int n = 1;
     Task arrayTask[] = new Task[n]; //arreglo tipo object
 
     /**
      * Method to add a task to the array
      * @param task task to be added to the array
      */
+    @Override
     public void add(Task task){
 
         Task arrayTaskTemp[] = new Task[arrayTask.length + 1];
@@ -25,13 +26,14 @@ public class ArrayTaskList {
      * @param task task to be removed
      * @return true if the task was in the array
      */
+    @Override
     public boolean remove(Task task) {
 
         Task arrayTask2[] = new Task[arrayTask.length];
         boolean taskInList = false;
         int k = 0;
         for (int i = 0, j = 0; i < arrayTask.length; i++) {
-            if(task.title.equals(arrayTask[i].title)
+            if(task.title == arrayTask[i].title
             && (task.time == arrayTask[i].time || task.start == arrayTask[i].start)) {
                 taskInList = true;
                 k++;
@@ -47,6 +49,7 @@ public class ArrayTaskList {
      * Method that tell the number of the tasks in the array
      * @return the number of the tasks
      */
+    @Override
     public int size() {
 
         return arrayTask.length;
@@ -57,6 +60,7 @@ public class ArrayTaskList {
      * @param index Element to be returned from the array
      * @return The object in the specified index
      */
+    @Override
     public Task getTask(int index) {
 
         if(index < arrayTask.length && index >= 0){
@@ -72,6 +76,7 @@ public class ArrayTaskList {
      * @param to end of the interval
      * @return A list of the tasks in the interval
      */
+    @Override
     public ArrayTaskList incoming(int from, int to) {
 
         ArrayTaskList selection = new ArrayTaskList();

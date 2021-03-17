@@ -3,7 +3,7 @@ package mx.edu.j2se.Guerrero.tasks;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class LinkedTaskList {
+public class LinkedTaskList extends AbstractTaskList {
 
     LinkedList<Task> list = new LinkedList<Task>(); //Linked list de objects
 
@@ -11,6 +11,7 @@ public class LinkedTaskList {
      * Method to add a task to the LinkedList
      * @param task task to be added
      */
+    @Override
     public void add(Task task){
 
         list.add(task);
@@ -22,15 +23,15 @@ public class LinkedTaskList {
      * @param task task to be removed
      * @return true if the task was in the list
      */
+    @Override
     public boolean remove(Task task) {
 
         boolean taskInList = false;
         int kLimit = list.size();
         outer: for(int k = 0; k < kLimit; k++) {
         int j = 0;
-        for (Iterator<Task> i = list.iterator();i.hasNext();) {
-            Task data = i.next();
-            if(data.title.equals(task.title) && data.time == task.time) {
+        for (Task temptask : list ) {
+            if(temptask.title == task.title && (temptask.time == task.time || temptask.start == task.start)) {
                 list.remove(j);
                 taskInList = true;
                 continue outer;
@@ -44,6 +45,7 @@ public class LinkedTaskList {
      * Method to see the number of elements in the LinkedList
      * @return the number of the elements in the list
      */
+    @Override
     public int size() {
 
         return list.size();
@@ -54,6 +56,7 @@ public class LinkedTaskList {
      * @param index Element to be returned from the list
      * @return The object in the specified index
      */
+    @Override
     public Task getTask(int index) {
 
         if(index < list.size() && index >= 0){
@@ -69,8 +72,8 @@ public class LinkedTaskList {
      * @param to end of the interval
      * @return A list of the tasks in the interval
      */
-
-    public LinkedTaskList Incoming(int from, int to) {
+    @Override
+    public LinkedTaskList incoming(int from, int to) {
 
         LinkedTaskList temp = new LinkedTaskList();
 

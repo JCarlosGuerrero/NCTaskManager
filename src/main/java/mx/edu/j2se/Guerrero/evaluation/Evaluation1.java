@@ -4,33 +4,28 @@ public class Evaluation1 {
 
     public static void main(String[] args) {
 
-        Circle objeto1 = new Circle();
-        Circle objeto2 = new Circle(-2);
 
-        objeto1.getRadius();
-        objeto2.getRadius();
+        try {
+            Circle objeto1 = new Circle(-2);
+        } catch (IllegalArgumentException e ){
+            System.out.println("El radio no puede ser negativo");
+        }
 
-        objeto1.setRadius(2);
-        objeto2.setRadius(3);
-
-        System.out.println(objeto1.getArea());
-        System.out.println(objeto2.getArea());
-
-        Circle array[] = new Circle[3];
+        Circle[] array = new Circle[3];
         array[0] = new Circle(3);
         array[1] = new Circle(6);
         array[2] = new Circle(9);
 
-        //System.out.println("The biggest circle is: " + biggestCircle(array[]));
+        System.out.println(array[biggestCircle(array)].getRadius());
     }
 
-    public static<T> int biggestCircle(T[] array,Circle big) {
-
+    private static int biggestCircle(Circle[] array) {
+        int maxIndex = 0;
         for (int i = 0; i < array.length; i++) {
-            big.getRadius();
-            if(big.getRadius() > big.getRadius()) {
-                return i;
+            if(array[i].getRadius() > array[maxIndex].getRadius()) {
+                maxIndex = i;
             }
-        } return 0;
+        }
+        return maxIndex;
     }
 }

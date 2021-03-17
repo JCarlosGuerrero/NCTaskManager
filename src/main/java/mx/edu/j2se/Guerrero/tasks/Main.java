@@ -25,8 +25,6 @@ public class Main {
 
 		objeto3.arrayTask[0] = new Task("correr",2);
 		objeto3.arrayTask[0].setActive(true);
-		objeto3.arrayTask[1] = new Task("nadar", 6,10,2);
-		objeto3.arrayTask[1].setActive(true);
 
 		objeto3.add(new Task("volar",6));
 		objeto3.add(new Task("teletransportar",1,2,3));
@@ -60,18 +58,13 @@ public class Main {
 
 		System.out.println(objeto4.getTask(1));
 
-		objeto4.Incoming(1,5);
+		objeto4.incoming(1,5);
 
+		AbstractTaskList objeto5 = new ArrayTaskList();
+		AbstractTaskList objeto6 = new LinkedTaskList();
 
-		/*persona estudianteNC = new persona();
-		estudianteNC.setEdad(19);
-		estudianteNC.setNombre("Eduardo");
-		int laEdad = estudianteNC.getEdad();
-		String loDejaron = estudianteNC.loDejanEntrarAlBar();
-		System.out.println(estudianteNC.getNombre() + loDejaron);
+		objeto5.add(new Task("ver tele",3));
+		objeto6.add(new Task("jugar con la pelota",2,10,2));
 
-		String elNombre = estudianteNC.getNombre();
-		System.out.println(elNombre);
-		*/
 	}
 }

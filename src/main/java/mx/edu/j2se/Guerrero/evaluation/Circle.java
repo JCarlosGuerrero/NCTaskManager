@@ -2,12 +2,12 @@ package mx.edu.j2se.Guerrero.evaluation;
 
 public class Circle {
 
-    private int radius;
+    private double radius;
 
     public Circle() {
         this.radius = 1;
     }
-    public Circle(int radius) {
+    public Circle(double radius) throws IllegalArgumentException {
         if(radius < 0) {
             throw new IllegalArgumentException("Radius  cannot be negative");
         }
@@ -21,7 +21,7 @@ public class Circle {
         this.radius = radius;
     }
 
-    public int getRadius() {return radius;}
+    public double getRadius() {return radius;}
 
     public double getArea() {
         return Math.PI * Math.pow(radius,2);
