@@ -1,7 +1,7 @@
 package mx.edu.j2se.Guerrero.tasks;
 
-import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class LinkedTaskList extends AbstractTaskList {
 
@@ -78,15 +78,54 @@ public class LinkedTaskList extends AbstractTaskList {
         LinkedTaskList temp = new LinkedTaskList();
 
         int j = 0;
-        for (Iterator<Task> i = list.iterator();i.hasNext();) {
-            Task data = i.next();
-            if(data.isActive()) {
-                if(data.start >= from && data.end <= to
-                || data.time >= from && data.time <= to) {
-                    temp.add(data);
+        for (Task temptask : list) {
+            if(temptask.isActive()) {
+                if(temptask.start >= from && temptask.end <= to
+                || temptask.time >= from && temptask.time <= to) {
+                    temp.add(temptask);
                 }
             }
         }
         return temp;
+    }
+
+    /**
+     * Method that returns true if two objects are the same
+     * @param o Object Task to compare
+     * @return True if the Tasks are the same
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LinkedTaskList integers = (LinkedTaskList) o;
+        return Objects.equals(list, integers.list);
+    }
+
+    /**
+     * Method that returns the hash code of the list
+     * @return The hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(list);
+    }
+
+    /**
+     * Method that writes in console the List
+     * @return The String of Lists
+     */
+    @Override
+    public String toString() {
+        return "LinkedTaskList{" +
+                "list=" + list +
+                '}';
+    }
+
+    /**
+     * Method that creates a copy of the current List
+     */
+    public void copy() {
+        LinkedTaskList copy = (LinkedTaskList) list.clone();
     }
 }

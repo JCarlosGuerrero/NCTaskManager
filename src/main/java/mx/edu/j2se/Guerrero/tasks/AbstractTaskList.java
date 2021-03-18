@@ -1,6 +1,8 @@
 package mx.edu.j2se.Guerrero.tasks;
 
-    abstract class AbstractTaskList {
+import java.util.Iterator;
+
+    abstract class AbstractTaskList implements Iterable<Task> {
 
         /**
          * Abstract method that adds a Task to an array or list
@@ -35,11 +37,39 @@ package mx.edu.j2se.Guerrero.tasks;
          * @return An array or a list of the tasks in the interval
          */
         abstract AbstractTaskList incoming(int from, int to);
+
+        /*
+        public Iterator<AbstractTaskList> iterator(){
+            return this.iterator();
+        }
+        */
+
+        /**
+         * Iterator for each element of the lists or Arrays
+         * @return true if the specified element is in the list or array
+         */
+        @Override
+        public Iterator<Task> iterator() {
+            //posibles variables
+            Iterator<Task> i = new Iterator<Task>() {
+                @Override
+                public boolean hasNext() {
+                    return false; //if sentence
+                }
+
+                @Override
+                public Task next() {
+                    return null; //posible adicion ++
+                }
+            };
+            return i;
+        }
     }
 
     class ListTypes {
 
-        public enum types { ARRAY, LINKED };
+        public enum types { ARRAY, LINKED }
+
     }
 
     class TaskListFactory {

@@ -1,12 +1,14 @@
 package mx.edu.j2se.Guerrero.tasks;
 
+import java.util.Objects;
+
 /**
  * Practical work No. 1 Project Structure
  * @version 1 17 02 2021
  * @author JoséCarlos
  */
 
-public class Task {
+public class Task implements Cloneable {
 
     String  title;
     int     time;
@@ -46,7 +48,6 @@ public class Task {
         this.end = end;
         this.interval = interval;
     }
-
 
     /**
      * Get the title of the task
@@ -206,5 +207,52 @@ public class Task {
         } else {
             return -1;
         }
+    }
+
+    /**
+     * Method that returns true if two objects are the same
+     * @param o Object Task to compare
+     * @return True if the Tasks are the same
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return time == task.time && start == task.start && end == task.end && interval == task.interval && active == task.active && Objects.equals(title, task.title);
+    }
+
+    /**
+     * Method that returns the hash code of the Task
+     * @return The hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, time, start, end, interval, active);
+    }
+
+    /**
+     * Method that writes in console the Tasks
+     * @return The String of tasks
+     */
+    @Override
+    public String toString() {
+        return "Task{" +
+                "title='" + title + '\'' +
+                ", time=" + time +
+                ", start=" + start +
+                ", end=" + end +
+                ", interval=" + interval +
+                ", active=" + active +
+                '}';
+    }
+
+    /**
+     * Method to copy a Task
+     * @return The copy of the Task
+     * @throws CloneNotSupportedException
+     */
+    public Object copy() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

@@ -1,11 +1,12 @@
 package mx.edu.j2se.Guerrero.tasks;
 
 import java.util.Arrays;
+import java.util.Objects;
 
-    public class ArrayTaskList extends AbstractTaskList {
+public class ArrayTaskList extends AbstractTaskList {
 
     int n = 1;
-    Task arrayTask[] = new Task[n]; //arreglo tipo object
+    Task[] arrayTask = new Task[n]; //arreglo tipo object
 
     /**
      * Method to add a task to the array
@@ -98,5 +99,48 @@ import java.util.Arrays;
         }
         selection.arrayTask = Arrays.copyOf(arrayTask2, k);
         return selection;
+    }
+
+    /**
+     * Method that returns true if two objects are the same
+     * @param o Object Task to compare
+     * @return True if the Tasks are the same
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ArrayTaskList integers = (ArrayTaskList) o;
+        return n == integers.n && Arrays.equals(arrayTask, integers.arrayTask);
+    }
+
+    /**
+     * Method that returns the hash code of the array
+     * @return The hash code
+     */
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(n);
+        result = 31 * result + Arrays.hashCode(arrayTask);
+        return result;
+    }
+
+    /**
+     * Method that writes in console the array of tasks
+     * @return The String of Arrays
+     */
+    @Override
+    public String toString() {
+        return "ArrayTaskList{" +
+                "n=" + n +
+                ", arrayTask=" + Arrays.toString(arrayTask) +
+                '}';
+    }
+
+    /**
+     * Method that creates a copy of the current Array
+      */
+    public void copy() {
+        Task[] copy = Arrays.copyOf(arrayTask,arrayTask.length);
     }
 }
