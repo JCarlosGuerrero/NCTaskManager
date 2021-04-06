@@ -2,11 +2,13 @@ package mx.edu.j2se.Guerrero.tasks;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public class ArrayTaskList extends AbstractTaskList {
 
     int n = 1;
     Task[] arrayTask = new Task[n]; //arreglo tipo object
+    Stream<Task> streamArrayTask = Stream.of(arrayTask);
 
     /**
      * Method to add a task to the array
@@ -70,35 +72,9 @@ public class ArrayTaskList extends AbstractTaskList {
         throw new IndexOutOfBoundsException("Index out of range");
     }
 
-    /**
-     * Method that tells you if there are tasks in the specified
-     * interval
-     * @param from start of the interval
-     * @param to end of the interval
-     * @return A list of the tasks in the interval
-     */
     @Override
-    public ArrayTaskList incoming(int from, int to) {
-
-        ArrayTaskList selection = new ArrayTaskList();
-        for (int i = 0;i < arrayTask.length; i++) {
-            if(arrayTask[i].active) {
-                if(arrayTask[i].start >= from && arrayTask[i].end <= to
-                || arrayTask[i].time >= from && arrayTask[i].time <= to) {
-                    selection.add(arrayTask[i]);
-                }
-            }
-        }
-        Task arrayTask2[] = new Task[arrayTask.length];
-        int k = 0;
-        for (int i = 0, j = 0;i < selection.arrayTask.length; i++) {
-            if(selection.arrayTask[i] != null){
-                arrayTask2[j++] = selection.arrayTask[i];
-                k++;
-            }
-        }
-        selection.arrayTask = Arrays.copyOf(arrayTask2, k);
-        return selection;
+    public Stream<Task> getStream() {
+        return this.streamArrayTask;
     }
 
     /**

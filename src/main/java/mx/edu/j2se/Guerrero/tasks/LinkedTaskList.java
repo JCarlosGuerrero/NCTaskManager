@@ -2,10 +2,12 @@ package mx.edu.j2se.Guerrero.tasks;
 
 import java.util.LinkedList;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public class LinkedTaskList extends AbstractTaskList {
 
     LinkedList<Task> list = new LinkedList<Task>(); //Linked list de objects
+    Stream<Task> streamList = list.stream();
 
     /**
      * Method to add a task to the LinkedList
@@ -65,28 +67,9 @@ public class LinkedTaskList extends AbstractTaskList {
         throw new IndexOutOfBoundsException("Index out of range");
     }
 
-    /**
-     * Method that tells you if there are tasks in the specified
-     * interval
-     * @param from start of the interval
-     * @param to end of the interval
-     * @return A list of the tasks in the interval
-     */
     @Override
-    public LinkedTaskList incoming(int from, int to) {
-
-        LinkedTaskList temp = new LinkedTaskList();
-
-        int j = 0;
-        for (Task temptask : list) {
-            if(temptask.isActive()) {
-                if(temptask.start >= from && temptask.end <= to
-                || temptask.time >= from && temptask.time <= to) {
-                    temp.add(temptask);
-                }
-            }
-        }
-        return temp;
+    public Stream<Task> getStream() {
+        return streamList;
     }
 
     /**
