@@ -72,11 +72,6 @@ public class ArrayTaskList extends AbstractTaskList {
         throw new IndexOutOfBoundsException("Index out of range");
     }
 
-    @Override
-    public Stream<Task> getStream() {
-        return this.streamArrayTask;
-    }
-
     /**
      * Method that returns true if two objects are the same
      * @param o Object Task to compare

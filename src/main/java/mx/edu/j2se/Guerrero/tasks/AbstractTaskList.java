@@ -1,6 +1,5 @@
 package mx.edu.j2se.Guerrero.tasks;
 
-import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
@@ -36,7 +35,7 @@ abstract class AbstractTaskList implements Iterable<Task> {
          * Abstract method  that allows to work with collections as with the streams
          * @return the stream
          */
-        public abstract Stream<Task> getStream();
+        //public abstract Stream<Task> getStream();
 
         /*
         public Iterator<AbstractTaskList> iterator(){
@@ -65,19 +64,4 @@ abstract class AbstractTaskList implements Iterable<Task> {
             return i;
         }
 
-        /**
-         * Method that tells you if there are tasks in the specified interval
-         * @param from Start of the interval
-         * @param to End of the interval
-         * @return An array or a list of the tasks in the interval
-         */
-        public final AbstractTaskList incoming(LocalDateTime from, LocalDateTime to) {
-            
-            this.forEach(task -> {
-                if (task.nextTimeAfter(from).isBefore(to)) {
-                    add(task);
-                }
-            });
-            return this;
-        }
     }

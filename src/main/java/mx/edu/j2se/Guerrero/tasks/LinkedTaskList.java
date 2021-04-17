@@ -1,13 +1,23 @@
 package mx.edu.j2se.Guerrero.tasks;
 
-import java.util.LinkedList;
 import java.util.Objects;
-import java.util.stream.Stream;
 
 public class LinkedTaskList extends AbstractTaskList {
 
-    LinkedList<Task> list = new LinkedList<Task>(); //Linked list de objects
-    Stream<Task> streamList = list.stream();
+    public Node head;
+    public Node last;
+    public static int count;
+
+    private static void incrementCount() {
+        count++;
+    }
+    private void decrementCount() {
+        count--;
+    }
+
+    private static int getCount() {
+        return count;
+    }
 
     /**
      * Method to add a task to the LinkedList
@@ -16,7 +26,15 @@ public class LinkedTaskList extends AbstractTaskList {
     @Override
     public void add(Task task){
 
-        list.add(task);
+        if (getCount() != 0) {
+            Node prev = last;
+            last = new Node(task);
+            prev.next = last;
+        } else {
+            last = new Node(task);
+            head = last;
+        }
+        incrementCount();
     }
 
     /**
@@ -29,18 +47,23 @@ public class LinkedTaskList extends AbstractTaskList {
     public boolean remove(Task task) {
 
         boolean taskInList = false;
-        int kLimit = list.size();
-        outer: for(int k = 0; k < kLimit; k++) {
-        int j = 0;
-        for (Task temptask : list ) {
-            if(temptask.title == task.title && (temptask.time == task.time || temptask.start == task.start)) {
-                list.remove(j);
+        Node prev = head;
+        Node current = head;
+
+        while (current.next != null || current == last) {
+            if (current.getTaskNode().equals(task)) {
+                if (count == 1) { head = null; last = null;}
+                else if (current.equals(head)) { head = head.next;}
+                else if (current.equals(last)) { last = prev;last.next = null;}
+                else {prev.next = current.next;}
+                decrementCount();
                 taskInList = true;
-                continue outer;
+                break;
             }
-            j++;
+            prev = current;
+            current = prev.next;
         }
-        } return taskInList;
+        return taskInList;
     }
 
     /**
@@ -49,8 +72,7 @@ public class LinkedTaskList extends AbstractTaskList {
      */
     @Override
     public int size() {
-
-        return list.size();
+        return getCount();
     }
 
     /**
@@ -60,16 +82,18 @@ public class LinkedTaskList extends AbstractTaskList {
      */
     @Override
     public Task getTask(int index) {
+        if (index < 0) return null;
 
-        if(index < list.size() && index >= 0){
-            return list.get(index);
+        Node current = null;
+        if (head != null) {
+            current = head;
+            for (int i = 0;i < index; i++) {
+                if (current.getNext() == null) return null;
+                current = current.getNext();
+            }
+            return current.getTaskNode();
         }
-        throw new IndexOutOfBoundsException("Index out of range");
-    }
-
-    @Override
-    public Stream<Task> getStream() {
-        return streamList;
+        return current.getTaskNode();
     }
 
     /**
@@ -81,9 +105,10 @@ public class LinkedTaskList extends AbstractTaskList {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LinkedTaskList integers = (LinkedTaskList) o;
-        return Objects.equals(list, integers.list);
+        LinkedTaskList tasks = (LinkedTaskList) o;
+        return Objects.equals(head, tasks.head) && Objects.equals(last, tasks.last);
     }
+
 
     /**
      * Method that returns the hash code of the list
@@ -91,7 +116,7 @@ public class LinkedTaskList extends AbstractTaskList {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(list);
+        return Objects.hash(head, last);
     }
 
     /**
@@ -101,14 +126,34 @@ public class LinkedTaskList extends AbstractTaskList {
     @Override
     public String toString() {
         return "LinkedTaskList{" +
-                "list=" + list +
+                "head=" + head +
+                ", last=" + last +
                 '}';
     }
 
     /**
      * Method that creates a copy of the current List
      */
-    public void copy() {
-        LinkedTaskList copy = (LinkedTaskList) list.clone();
+    public Object clone() throws CloneNotSupportedException {
+        LinkedTaskList copy = (LinkedTaskList) super.clone();
+        return copy;
+    }
+}
+
+class Node {
+    Node next;
+    Task task;
+
+    public Node(Task task) {
+        next = null;
+        this.task = task;
+    }
+
+    public Task getTaskNode() {
+        return task;
+    }
+
+    public Node getNext(){
+        return next;
     }
 }

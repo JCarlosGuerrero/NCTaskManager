@@ -7,10 +7,18 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		Task objeto1 = new Task("comer", LocalDateTime.of(2021,01,10,7,30));
+		Task objeto1 = new Task("comer", LocalDateTime.of(2021, 01, 10, 7, 30));
 		System.out.println(objeto1);
 
-		TaskListFactory.createTaskList(ListTypes.types.ARRAY);
-		System.out.println("Hola");
+		LinkedTaskList objeto2 = new LinkedTaskList();
+		objeto2.add(new Task("comer", LocalDateTime.of(2021, 01, 10, 7, 30)));
+		objeto2.add(new Task("bailar", LocalDateTime.of(2021, 01, 10, 7, 30)));
+		objeto2.add(new Task("jugar", LocalDateTime.of(2021, 01, 10, 7, 30)));
+		objeto2.add(new Task("dormir", LocalDateTime.of(2021, 01, 10, 7, 30)));
+		objeto2.add(new Task("correr", LocalDateTime.of(2021, 01, 10, 7, 30)));
+		System.out.println(objeto2.size());
+		System.out.println(objeto2.getTask(3));
+		objeto2.remove(new Task("bailar", LocalDateTime.of(2021, 01, 10, 7, 30)));
+		System.out.println("hola");
 	}
 }
