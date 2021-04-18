@@ -1,5 +1,6 @@
 package mx.edu.j2se.Guerrero.tasks;
 
+import java.util.Iterator;
 import java.util.Objects;
 
 public class LinkedTaskList extends AbstractTaskList {
@@ -94,6 +95,28 @@ public class LinkedTaskList extends AbstractTaskList {
             return current.getTaskNode();
         }
         return current.getTaskNode();
+    }
+
+    /**
+     * Iterator for each element of the List
+     * @return true if the specified element is in the List
+     */
+    @Override
+    public Iterator<Task> iterator() {
+        return new LinkedIterator();
+    }
+
+    public class LinkedIterator implements Iterator<Task> {
+        private int cursor = 0;
+
+        public boolean hasNext() {
+            return cursor < size();
+        }
+
+        public Task next() {
+            cursor++;
+            return getTask(cursor -1);
+        }
     }
 
     /**

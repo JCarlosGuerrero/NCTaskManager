@@ -1,6 +1,7 @@
 package mx.edu.j2se.Guerrero.tasks;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -8,7 +9,6 @@ public class ArrayTaskList extends AbstractTaskList {
 
     int n = 1;
     Task[] arrayTask = new Task[n]; //arreglo tipo object
-    Stream<Task> streamArrayTask = Stream.of(arrayTask);
 
     /**
      * Method to add a task to the array
@@ -70,6 +70,30 @@ public class ArrayTaskList extends AbstractTaskList {
             return arrayTask[index];
         }
         throw new IndexOutOfBoundsException("Index out of range");
+    }
+
+    /**
+     * Iterator for each element of the Array
+     * @return true if the specified element is in the array
+     */
+    @Override
+    public Iterator<Task> iterator() {
+        return new iterator();
+    }
+
+    public class iterator implements Iterator<Task> {
+        private int cursor = 0;
+
+        @Override
+        public boolean hasNext() {
+            return cursor < size();
+        }
+
+        @Override
+        public Task next() {
+            cursor++;
+            return getTask(cursor - 1);
+        }
     }
 
     /**
