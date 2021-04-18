@@ -2,6 +2,7 @@ package mx.edu.j2se.Guerrero.tasks;
 
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public class LinkedTaskList extends AbstractTaskList {
 
@@ -160,6 +161,19 @@ public class LinkedTaskList extends AbstractTaskList {
     public Object clone() throws CloneNotSupportedException {
         LinkedTaskList copy = (LinkedTaskList) super.clone();
         return copy;
+    }
+
+    @Override
+    public Stream<Task> getStream() {
+
+        Node head = this.head;
+        Stream.Builder<Task> streamList = Stream.builder();
+
+        while(head != null) {
+            streamList.add(head.task);
+            head = head.next;
+        }
+        return streamList.build();
     }
 }
 

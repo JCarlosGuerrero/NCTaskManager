@@ -138,4 +138,9 @@ public class ArrayTaskList extends AbstractTaskList {
     public void copy() {
         Task[] copy = Arrays.copyOf(arrayTask,arrayTask.length);
     }
+
+    @Override
+    public Stream<Task> getStream(){
+        return Stream.of(arrayTask);
+    }
 }

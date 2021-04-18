@@ -32,13 +32,15 @@ abstract class AbstractTaskList implements Iterable<Task> {
         public abstract Task getTask(int index);
 
         /**
-         * Abstract method  that allows to work with collections as with the streams
-         * @return the stream
-         */
-
-        /**
          * Iterator for each element of the lists or Arrays
          * @return true if the specified element is in the list or array
          */
         public abstract Iterator<Task> iterator();
+
+        /**
+         * Abstract method  that allows to work with collections as with the streams
+         * @return the stream
+         */
+        public abstract Stream<Task> getStream();
+
     }
