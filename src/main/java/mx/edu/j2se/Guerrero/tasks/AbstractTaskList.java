@@ -2,8 +2,9 @@ package mx.edu.j2se.Guerrero.tasks;
 
 import java.util.Iterator;
 import java.util.stream.Stream;
+import java.io.Serializable;
 
-abstract class AbstractTaskList implements Iterable<Task> {
+public abstract class AbstractTaskList implements Iterable<Task>, Serializable {
 
     /**
          * Abstract method that adds a Task to an array or list

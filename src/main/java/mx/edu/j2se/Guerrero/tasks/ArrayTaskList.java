@@ -2,13 +2,11 @@ package mx.edu.j2se.Guerrero.tasks;
 
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.Objects;
 import java.util.stream.Stream;
 
 public class ArrayTaskList extends AbstractTaskList {
 
-    int n = 1;
-    Task[] arrayTask = new Task[n]; //arreglo tipo object
+    Task[] arrayTask = new Task[0]; //arreglo tipo object
 
     /**
      * Method to add a task to the array
@@ -105,8 +103,8 @@ public class ArrayTaskList extends AbstractTaskList {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ArrayTaskList integers = (ArrayTaskList) o;
-        return n == integers.n && Arrays.equals(arrayTask, integers.arrayTask);
+        ArrayTaskList tasks = (ArrayTaskList) o;
+        return Arrays.equals(arrayTask, tasks.arrayTask);
     }
 
     /**
@@ -115,9 +113,7 @@ public class ArrayTaskList extends AbstractTaskList {
      */
     @Override
     public int hashCode() {
-        int result = Objects.hash(n);
-        result = 31 * result + Arrays.hashCode(arrayTask);
-        return result;
+        return Arrays.hashCode(arrayTask);
     }
 
     /**
@@ -127,16 +123,20 @@ public class ArrayTaskList extends AbstractTaskList {
     @Override
     public String toString() {
         return "ArrayTaskList{" +
-                "n=" + n +
-                ", arrayTask=" + Arrays.toString(arrayTask) +
+                "arrayTask=" + Arrays.toString(arrayTask) +
                 '}';
     }
 
     /**
      * Method that creates a copy of the current Array
       */
-    public void copy() {
-        Task[] copy = Arrays.copyOf(arrayTask,arrayTask.length);
+    public ArrayTaskList copy() {
+
+        ArrayTaskList copy = new ArrayTaskList();
+        for (Task task : arrayTask) {
+            copy.add(task);
+        }
+        return copy;
     }
 
     @Override

@@ -158,8 +158,11 @@ public class LinkedTaskList extends AbstractTaskList {
     /**
      * Method that creates a copy of the current List
      */
-    public Object clone() throws CloneNotSupportedException {
-        LinkedTaskList copy = (LinkedTaskList) super.clone();
+    public LinkedTaskList copy() {
+        LinkedTaskList copy = new LinkedTaskList();
+        for(Node count = head; count != null; count = count.next) {
+            copy.add(count.task);
+        }
         return copy;
     }
 

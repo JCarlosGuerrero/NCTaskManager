@@ -7,7 +7,7 @@ package mx.edu.j2se.Guerrero.tasks;
          * @param type array or linked list
          * @return Array or List
          */
-        static AbstractTaskList createTaskList(ListTypes.types type) {
+        public static AbstractTaskList createTaskList(ListTypes.types type) {
 
             for (ListTypes.types types : ListTypes.types.values()) {
                 switch (types) {

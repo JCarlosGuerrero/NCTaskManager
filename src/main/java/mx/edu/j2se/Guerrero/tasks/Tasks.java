@@ -14,7 +14,6 @@ public class Tasks {
      */
     public static final Iterable<Task> incoming(Iterable<Task> tasks, LocalDateTime start, LocalDateTime end) {
 
-
         AbstractTaskList taskList = TaskListFactory.createTaskList(tasks instanceof LinkedTaskList ? ListTypes.types.LINKED : ListTypes.types.ARRAY);
 
         tasks.forEach(task-> {

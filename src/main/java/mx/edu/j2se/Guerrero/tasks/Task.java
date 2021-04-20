@@ -1,8 +1,8 @@
 package mx.edu.j2se.Guerrero.tasks;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Objects;
+import java.io.Serializable;
 
 /**
  * Practical work No. 1 Project Structure
@@ -10,7 +10,7 @@ import java.util.Objects;
  * @author JoséCarlos
  */
 
-public class Task implements Cloneable {
+public class Task implements Serializable, Cloneable {
 
     String          title;
     LocalDateTime   time;
@@ -177,7 +177,7 @@ public class Task implements Cloneable {
      * @return if is a repetitive task
      */
     public boolean isRepeated() {
-        return !interval.isEqual( null);
+        return interval != null;
     }
 
     /**
@@ -194,7 +194,7 @@ public class Task implements Cloneable {
             } else if(isRepeated() && current.isBefore(end) && current.isAfter(start)) {
                 LocalDateTime intervalos = start;
                 while (intervalos.isBefore(current)) {
-                    intervalos.plusHours(interval.getHour());
+                    intervalos = intervalos.plusDays(interval.getDayOfYear());
                 }
                 return (intervalos.isAfter(end)) ? end : intervalos;
             } else if(!isRepeated() && current.isBefore(time)) {
